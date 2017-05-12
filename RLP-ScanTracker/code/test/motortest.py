@@ -15,7 +15,7 @@ print("using GPIO BCM mode")
 #IN3->GPIO-18
 #IN4->GPIO-23
 
-ENA = 4
+ENA = 7
 ENB = 22
 IN1 = 17
 IN2 = 27

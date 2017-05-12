@@ -50,7 +50,7 @@ class MrBit_QTR_8RC:
         self.wp.wiringPiSetup()
  
         self.LEDON_PIN = 21
-        self.SENSOR_PINS = [26, 23, 27, 24, 28, 25] #pins 22(sensor 1) and 29(sensor 2) not used
+        self.SENSOR_PINS = [26, 23, 27, 24, 28, 25] #pins 22(sensor 1) and 29(sensor 8) not used
         self.NUM_SENSORS = len(self.SENSOR_PINS)
         self.CHARGE_TIME = 10 #us to charge the capacitors
         self.READING_TIMEOUT = 1000 #us, assume reading is black
@@ -163,8 +163,8 @@ class MrBit_QTR_8RC:
  
         self.read_sensors()
  
-        print("uncalibrated readings")
-        self.print_sensor_values(self.sensorValues)
+        #print("uncalibrated readings")
+        #self.print_sensor_values(self.sensorValues)
  
         for i in range(0, self.NUM_SENSORS):
             denominator = self.calibratedMax[i] - self.calibratedMin[i]
@@ -177,8 +177,8 @@ class MrBit_QTR_8RC:
                 val = 1000
             self.sensorValues[i] = val
  
-        print("calibrated readings")
-        self.print_sensor_values(self.sensorValues)
+        #print("calibrated readings")
+        #self.print_sensor_values(self.sensorValues)
  
  
     def read_sensors(self):
