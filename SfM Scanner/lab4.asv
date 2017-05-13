@@ -36,27 +36,34 @@ for i = 1:numel(matchedPoints)
         image2Coords = matchedPoints{i}{2}.Location';
         [F{i}, inliers{i}] = ransacfitfundmatrix7(image1Coords, image2Coords, 0.01);
     catch
-        warning('doh');
+        warning('ransac fucked up');
     end
 end
 
 
 if showRANSACinliers
-    for i=numel(matchedPoints)
-        RANSACinliers1 = matchedPoints{i}{1}.Location;
-        RANSACinliers2 = matchedPoints{i}{2}.Location;
-        RANSA
+    for i=1:numel(matchedPoints)
+        RANSACinliers1 = matchedPoints{i}{1}.Location;RANSACinliers1 = RANSACinliers1(inliers{i},:);
+        RANSACinliers2 = matchedPoints{i}{2}.Location;RANSACinliers2 = RANSACinliers2(inliers{i},:);
         figure(1);ax = axes; 
         showMatchedFeatures(images{i},images{i+1},RANSACinliers1, RANSACinliers2,'montage','Parent', ax);
         pause(0.2);
     end
+    pause(0.8)
+    close all
 end
 
+%%%%%%% INTRINSIC CAMERA PARAMETERS (K)
+K = [1520.400000 0.000000    302.320000 
+     0.000000    1525.900000 246.870000 
+     0.000000    0.000000    1.000000];
 
 
+E = {numel(matchedPoints)};
 
-
-
+for i=1:numel(matchedPoints)
+   E{i} = inv(K)' * F{i} * K; 
+end
 
 
 

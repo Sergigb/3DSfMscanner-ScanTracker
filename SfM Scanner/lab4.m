@@ -36,7 +36,7 @@ for i = 1:numel(matchedPoints)
         image2Coords = matchedPoints{i}{2}.Location';
         [F{i}, inliers{i}] = ransacfitfundmatrix7(image1Coords, image2Coords, 0.01);
     catch
-        warning('doh');
+        warning('ransac fucked up');
     end
 end
 
@@ -53,13 +53,32 @@ if showRANSACinliers
     close all
 end
 
+%%%%%%% INTRINSIC CAMERA PARAMETERS (K)
+K = [1520.400000 0.000000    302.320000 
+     0.000000    1525.900000 246.870000 
+     0.000000    0.000000    1.000000];
+
+%Essential matrixes
+E = {numel(matchedPoints)};
+
+for i=1:numel(matchedPoints)
+   E{i} = transpose(inv(K)) * F{i} * K; 
+end
 
 
 
-
-
-
-
+for i=1:numel(E)
+    figure(2);
+    [U,S,V] = svd(E{i});
+    
+    T = U*[0,1,0;-1,0,0;0,0,0]*transpose(U);
+    R = U*[0,1,0;-1,0,0;0,0,1]*transpose(V);
+    
+    disp(strcat(num2str(T(3,2)),',',num2str(T(1,3)),',',num2str(T(2,1))));
+    scatter3(T(3,2),T(1,3),T(2,1));
+    
+    hold on
+end
 
 
 
