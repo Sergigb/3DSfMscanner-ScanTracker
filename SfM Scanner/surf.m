@@ -1,4 +1,4 @@
-%%test
+
 
 addpath('./temple/');
 im1 = imread('temple0011.png');
