@@ -120,14 +120,14 @@ for i=1:numel(F)        %24-25 works pretty well -- 14-15 is also p good
     colormap winter
 end
 
-% pcshow(part1, 'VerticalAxis', 'y', 'VerticalAxisDir', 'down', ...
-%     'MarkerSize', 120);
-% hold on
-% pcshow(part2, 'VerticalAxis', 'y', 'VerticalAxisDir', 'down', ...
-%     'MarkerSize', 120);
-% colormap winter
+pcshow(part1, 'VerticalAxis', 'y', 'VerticalAxisDir', 'down', ...
+    'MarkerSize', 120);
+hold on
+pcshow(rotate3d(part2, 90), 'VerticalAxis', 'y', 'VerticalAxisDir', 'down', ...
+    'MarkerSize', 120);
+colormap winter
 
-
+rotate3d(
 tmpAspect=daspect();
 daspect(tmpAspect([1 2 2]))
 
